@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Master Lexicon — Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="bg-dark text-light">
+
+    <!-- NAVBAR WITH LOGO -->
+    <div class="navbar bg-secondary p-3 d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center">
+            <img src="/static/logo.png" class="logo me-3" alt="Master Lexicon Logo">
+            <h3 class="fw-bold">Master Lexicon Dashboard</h3>
+        </div>
+
+        <form action="/logout" method="POST">
+            <button class="btn btn-danger">Logout</button>
+        </form>
+    </div>
+
+    <div class="container mt-4">
+
+        <!-- ADD ENTRY CARD -->
+        <div class="card p-4 bg-secondary">
+            <h5>Add New Lexicon Entry</h5>
+            <form method="POST" action="/add" class="row g-3">
+                <div class="col-md-4">
+                    <input type="text" name="english" class="form-control" placeholder="English word" required>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" name="swahili" class="form-control" placeholder="Swahili translation" required>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" name="category" class="form-control" placeholder="Category (optional)">
+                </div>
+                <div class="col-md-1">
+                    <button class="btn btn-primary w-100">Add</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- SEARCH CARD -->
+        <div class="card p-4 bg-secondary mt-3">
+            <form method="GET" action="/search" class="d-flex">
+                <input type="text" name="q" class="form-control me-2" placeholder="Search English, Swahili, or Category">
+                <button class="btn btn-primary">Search</button>
+            </form>
+        </div>
+
+        <!-- TABLE -->
+        <div class="card p-4 bg-secondary mt-3">
+            <table class="table table-dark table-hover">
+                <thead>
+                    <tr>
+                        <th>English</th>
+                        <th>Swahili</th>
+                        <th>Category</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for entry in entries %}
+                    <tr>
+                        <td>{{ entry['english'] }}</td>
+                        <td>{{ entry['swahili'] }}</td>
+                        <td>{{ entry['category'] }}</td>
+                        <td>
+                            <form action="/delete/{{ entry['id'] }}" method="POST">
+                                <button class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</body>
+</html>

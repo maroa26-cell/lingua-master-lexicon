@@ -1,0 +1,80 @@
+term_en,term_sw,pos,definition_en,definition_sw,domains,example_en,example_sw,shortcode,version,source,language_pair,created,updated
+legal system,muundo wa sheria,noun,structure of laws,muundo wa sheria,law,The legal system guides justice.,Mfumo wa sheria unaongoza haki.,LS01,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal framework,muundo wa kisheria,noun,legal structure,muundo wa kisheria,law,The legal framework supports governance.,Muundo wa kisheria unaunga utawala.,LF01,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal authority,mamlaka ya kisheria,noun,power granted by law,mamlaka ya kisheria,law,The court has legal authority.,Mahakama ina mamlaka ya kisheria.,LA01,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal procedure,utaratibu wa kisheria,noun,steps required by law,utaratibu wa kisheria,law,Follow the legal procedure.,Fuata utaratibu wa kisheria.,LP01,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal code,kanuni za sheria,noun,collection of laws,mkusanyiko wa sheria,law,The legal code defines rules.,Kanuni za sheria zinafafanua kanuni.,LC01,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal dispute,mzozo wa kisheria,noun,conflict under law,mzozo wa kisheria,law,They resolved the legal dispute.,Walitatua mzozo wa kisheria.,LD01,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal notice,taarifa ya kisheria,noun,official legal communication,taarifa ya kisheria,law,He received a legal notice.,Alipokea taarifa ya kisheria.,LN01,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal penalty,adhabu ya kisheria,noun,punishment by law,adhabu ya kisheria,law,The legal penalty was severe.,Adhabu ya kisheria ilikuwa kali.,LP02,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal rights,haki za kisheria,noun,rights protected by law,haki za kisheria,law,Everyone has legal rights.,Kila mtu ana haki za kisheria.,LR01,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal obligation,wajibu wa kisheria,noun,duty required by law,wajibu wa kisheria,law,It is a legal obligation.,Ni wajibu wa kisheria.,LO01,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal reform,mageuzi ya sheria,noun,changes to law,mageuzi ya sheria,law,Legal reform improves justice.,Mageuzi ya sheria yanaboresha haki.,LR02,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal interpretation,ufafanuzi wa sheria,noun,explaining law,ufafanuzi wa sheria,law,Legal interpretation varies.,Ufafanuzi wa sheria hutofautiana.,LI01,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal advisor,mshauri wa sheria,noun,legal consultant,mshauri wa sheria,law,He consulted a legal advisor.,Alishauriana na mshauri wa sheria.,LA02,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal document,nyaraka ya kisheria,noun,official legal paper,nyaraka ya kisheria,law,The legal document was signed.,Nyaraka ya kisheria ilisainiwa.,LD02,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal claim,madai ya kisheria,noun,legal demand,madai ya kisheria,law,She filed a legal claim.,Aliwasilisha madai ya kisheria.,LC02,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal counsel,ushauri wa kisheria,noun,legal guidance,ushauri wa kisheria,law,He sought legal counsel.,Alitafuta ushauri wa kisheria.,LC03,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal jurisdiction,eneo la kisheria,noun,area of legal authority,eneo la kisheria,law,This case is under legal jurisdiction.,Kesi iko chini ya eneo la kisheria.,LJ01,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal mandate,agizo la kisheria,noun,legal requirement,agizo la kisheria,law,The legal mandate was enforced.,Agizo la kisheria lilitekelezwa.,LM01,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal appeal,rufaa ya kisheria,noun,request for legal review,rufaa ya kisheria,law,He filed a legal appeal.,Aliwasilisha rufaa ya kisheria.,LA03,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal settlement,makubaliano ya kisheria,noun,legal resolution,makubaliano ya kisheria,law,They reached a legal settlement.,Walifikia makubaliano ya kisheria.,LS03,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal compliance,utiifu wa sheria,noun,following the law,utiifu wa sheria,law,Legal compliance is required.,Utiifu wa sheria unahitajika.,LC04,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal breach,ukiukaji wa sheria,noun,breaking the law,ukiukaji wa sheria,law,The breach was serious.,Ukiukaji ulikuwa mkubwa.,LB01,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal guardian,mlezi wa kisheria,noun,appointed protector,mlezi wa kisheria,law,She is the legal guardian.,Yeye ni mlezi wa kisheria.,LG01,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal contract,mkataba wa kisheria,noun,legal agreement,mkataba wa kisheria,law,They signed a legal contract.,Walisaini mkataba wa kisheria.,LC05,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal evidence,uthibitisho wa kisheria,noun,proof under law,uthibitisho wa kisheria,law,The legal evidence was strong.,Ushahidi wa kisheria ulikuwa thabiti.,LE01,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal hearing,kusikilizwa kwa kesi,noun,legal session,kusikilizwa kwa kesi,law,The legal hearing began.,Kusikilizwa kwa kesi kulianza.,LH01,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal ruling,uamuzi wa kisheria,noun,decision by court,uamuzi wa kisheria,law,The legal ruling was final.,Uamuzi wa kisheria ulikuwa wa mwisho.,LR03,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal violation,ukiukaji wa kisheria,noun,breaking legal rules,ukiukaji wa kisheria,law,The violation was recorded.,Ukiukaji ulirekodiwa.,LV01,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal compliance officer,afisa wa utiifu wa sheria,noun,law compliance officer,afisa wa utiifu wa sheria,law,The officer ensured compliance.,Afisa alihakikisha utiifu.,LCO1,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal dispute resolution,utatuzi wa mzozo wa kisheria,noun,solving legal conflict,utatuzi wa mzozo wa kisheria,law,They used dispute resolution.,Walitumia utatuzi wa mzozo.,LDR1,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal enforcement,utekelezaji wa sheria,noun,law enforcement,utekelezaji wa sheria,law,Legal enforcement is necessary.,Utekelezaji wa sheria ni muhimu.,LE02,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal exemption,msamaha wa kisheria,noun,legal exception,msamaha wa kisheria,law,He received a legal exemption.,Alipata msamaha wa kisheria.,LEX1,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal filing,mawasilisho ya kisheria,noun,legal submission,mawasilisho ya kisheria,law,The legal filing was accepted.,Mawasilisho ya kisheria yakakubaliwa.,LF02,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal liability,uwajibikaji wa kisheria,noun,legal responsibility,uwajibikaji wa kisheria,law,He has legal liability.,Ana uwajibikaji wa kisheria.,LL01,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal opinion,maoni ya kisheria,noun,expert legal view,maoni ya kisheria,law,She gave a legal opinion.,Alitoa maoni ya kisheria.,LO02,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal procedure manual,kitabu cha utaratibu wa kisheria,noun,legal guide,kitabu cha utaratibu wa kisheria,law,The manual explains procedures.,Kitabu kinaeleza taratibu.,LPM1,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal protection,ulinzi wa kisheria,noun,legal safeguarding,ulinzi wa kisheria,law,He requested legal protection.,Aliomba ulinzi wa kisheria.,LP03,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal registration,usajili wa kisheria,noun,legal recording,usajili wa kisheria,law,The registration was completed.,Usajili ulikamilika.,LR04,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal review,mapitio ya kisheria,noun,legal evaluation,mapitio ya kisheria,law,They conducted a legal review.,Walifanya mapitio ya kisheria.,LR05,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal sanction,adhabu ya kisheria,noun,legal punishment,adhabu ya kisheria,law,The sanction was applied.,Adhabu ilitumika.,LS04,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal statute,kanuni ya sheria,noun,written law,kanuni ya sheria,law,The statute was amended.,Kanuni ya sheria ilirekebishwa.,LS05,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal amendment,marekebisho ya sheria,noun,change to law,marekebisho ya sheria,law,The amendment passed.,Marekebisho yalipitishwa.,LA04,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal arbitration,usuluhishi wa kisheria,noun,legal mediation,usuluhishi wa kisheria,law,Arbitration resolved the issue.,Usuluhishi ulitatua tatizo.,LA05,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal assessment,tathmini ya kisheria,noun,legal evaluation,tathmini ya kisheria,law,They conducted a legal assessment.,Walifanya tathmini ya kisheria.,LA06,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal audit,ukaguzi wa kisheria,noun,legal inspection,ukaguzi wa kisheria,law,The legal audit was completed.,Ukaguzi wa kisheria ulikamilika.,LA07,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal authorization,idhini ya kisheria,noun,legal approval,idhini ya kisheria,law,He received legal authorization.,Alipata idhini ya kisheria.,LA08,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal briefing,maelezo ya kisheria,noun,legal summary,maelezo ya kisheria,law,She gave a legal briefing.,Alitoa maelezo ya kisheria.,LB02,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal classification,uainishaji wa kisheria,noun,legal categorization,uainishaji wa kisheria,law,The classification was updated.,Uainishaji uliboreshwa.,LC06,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal committee,kamati ya kisheria,noun,legal group,kamati ya kisheria,law,The committee met.,Kamati ilikutana.,LC07,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal compliance review,mapitio ya utiifu wa sheria,noun,compliance evaluation,mapitio ya utiifu wa sheria,law,They performed a compliance review.,Walifanya mapitio ya utiifu.,LCR1,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal consultation,ushauri wa kisheria,noun,legal advice,ushauri wa kisheria,law,He booked a legal consultation.,Aliweka miadi ya ushauri wa kisheria.,LC08,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal declaration,tamko la kisheria,noun,legal statement,tamko la kisheria,law,He issued a legal declaration.,Alitoa tamko la kisheria.,LD03,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal dispute management,usimamizi wa mzozo wa kisheria,noun,managing legal conflict,usimamizi wa mzozo wa kisheria,law,They improved dispute management.,Waliboresha usimamizi wa mzozo.,LDM1,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal enforcement agency,taasisi ya utekelezaji wa sheria,noun,law enforcement body,taasisi ya utekelezaji wa sheria,law,The agency acted.,Taasisi ilichukua hatua.,LEA1,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal evaluation,tathmini ya kisheria,noun,legal review,tathmini ya kisheria,law,The evaluation was thorough.,Tathmini ilikuwa ya kina.,LE03,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal expertise,utaalamu wa kisheria,noun,legal skill,utaalamu wa kisheria,law,She has legal expertise.,Ana utaalamu wa kisheria.,LE04,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal guidance,muongozo wa kisheria,noun,legal direction,muongozo wa kisheria,law,He provided legal guidance.,Alitoa muongozo wa kisheria.,LG02,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal inspection,ukaguzi wa kisheria,noun,legal checking,ukaguzi wa kisheria,law,They conducted a legal inspection.,Walifanya ukaguzi wa kisheria.,LI03,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal instruction,maelekezo ya kisheria,noun,legal directives,maelekezo ya kisheria,law,He followed legal instructions.,Alifuata maelekezo ya kisheria.,LI04,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal mediation,usuluhishi wa kisheria,noun,legal conflict resolution,usuluhishi wa kisheria,law,They used legal mediation.,Walitumia usuluhishi wa kisheria.,LM02,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal monitoring,ufuatiliaji wa kisheria,noun,legal tracking,ufuatiliaji wa kisheria,law,Legal monitoring was required.,Ufuatiliaji wa kisheria ulihitajika.,LM03,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal obligation review,mapitio ya wajibu wa kisheria,noun,review of legal duties,mapitio ya wajibu wa kisheria,law,They conducted an obligation review.,Walifanya mapitio ya wajibu.,LOR1,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal oversight,usimamizi wa kisheria,noun,legal supervision,usimamizi wa kisheria,law,Legal oversight was needed.,Usimamizi wa kisheria ulihitajika.,LO03,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal policy,siasa ya kisheria,noun,legal rules,siasa ya kisheria,law,The legal policy was updated.,Siasa ya kisheria ilisasishwa.,LP04,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal procedure checklist,orodha ya utaratibu wa kisheria,noun,legal checklist,orodha ya utaratibu wa kisheria,law,They used a procedure checklist.,Walitumia orodha ya utaratibu.,LPC1,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal protection order,agizo la ulinzi wa kisheria,noun,legal protection directive,agizo la ulinzi wa kisheria,law,The court issued a protection order.,Mahakama ilitoa agizo la ulinzi.,LPO1,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal provision,kifungu cha sheria,noun,legal clause,kifungu cha sheria,law,The provision was applied.,Kifungu kilitumika.,LP05,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal record,rejesho la kisheria,noun,legal documentation,rejesho la kisheria,law,The record was stored.,Rejesho liliwekwa.,LR06,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal registration office,ofisi ya usajili wa kisheria,noun,legal registry office,ofisi ya usajili wa kisheria,law,He visited the registration office.,Alitembelea ofisi ya usajili.,LRO1,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal regulation,kanuni ya kisheria,noun,legal rule,kanuni ya kisheria,law,The regulation was enforced.,Kanuni ilitekelezwa.,LR07,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal responsibility,uwajibikaji wa kisheria,noun,legal duty,uwajibikaji wa kisheria,law,He accepted legal responsibility.,Alikubali uwajibikaji wa kisheria.,LR08,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal restriction,kizuizi cha kisheria,noun,legal limitation,kizuizi cha kisheria,law,The restriction was lifted.,Kizuizi kiliondolewa.,LR09,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal review board,baraza la mapitio ya kisheria,noun,legal review committee,baraza la mapitio ya kisheria,law,The board met.,Baraza lilikutana.,LRB1,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal rights protection,ulinzi wa haki za kisheria,noun,protection of legal rights,ulinzi wa haki za kisheria,law,They ensured rights protection.,Walihakikisha ulinzi wa haki.,LRP1,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal ruling summary,muhtasari wa uamuzi wa kisheria,noun,ruling summary,muhtasari wa uamuzi wa kisheria,law,He read the ruling summary.,Alisoma muhtasari wa uamuzi.,LRS1,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal statute interpretation,ufafanuzi wa kanuni ya sheria,noun,interpretation of statute,ufafanuzi wa kanuni ya sheria,law,Interpretation was needed.,Ufafanuzi ulihitajika.,LSI1,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal supervision,usimamizi wa kisheria,noun,legal oversight,usimamizi wa kisheria,law,Legal supervision was applied.,Usimamizi wa kisheria ulitumika.,LSU1,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal implementation,utekelezaji wa sheria,noun,law implementation,utekelezaji wa sheria,law,Implementation was completed.,Utekelezaji ulikamilika.,LI02,1.0,manual,EN-SW,2026-09-14,2026-09-14
+legal framework analysis,uchambuzi wa muundo wa kisheria,noun,framework review,uchambuzi wa muundo wa kisheria,law,They conducted analysis.,Walifanya uchambuzi.,LFA1,1.0,manual,EN-SW,2026-09-14,2026-09-14

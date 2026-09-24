@@ -1,0 +1,52 @@
+[
+    {
+        "English": "Hello",
+        "Swahili": "Habari",
+        "Category": "Greeting"
+    },
+    {
+        "English": "Book",
+        "Swahili": "Kitabu",
+        "Category": "Object"
+    },
+    {
+        "English": "Water",
+        "Swahili": "Maji",
+        "Category": "Nature"
+    },
+    {
+        "English": "Love",
+        "Swahili": "Upendo",
+        "Category": "Emotion"
+    },
+    {
+        "English": "Computer",
+        "Swahili": "Kompyuta",
+        "Category": "Technology"
+    },
+    {
+        "English": "Hello",
+        "Swahili": "Habari",
+        "Category": "Greeting"
+    },
+    {
+        "English": "Book",
+        "Swahili": "Kitabu",
+        "Category": "Object"
+    },
+    {
+        "English": "Water",
+        "Swahili": "Maji",
+        "Category": "Nature"
+    },
+    {
+        "English": "Love",
+        "Swahili": "Upendo",
+        "Category": "Emotion"
+    },
+    {
+        "English": "Computer",
+        "Swahili": "Kompyuta",
+        "Category": "Technology"
+    }
+]

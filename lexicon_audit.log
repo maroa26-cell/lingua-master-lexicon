@@ -1,0 +1,38 @@
+{"time": "2026-09-24T00:37:59.096266", "type": "system_start", "user": "system", "message": "Lexicon v5 dashboard started"}
+{"time": "2026-09-24T00:37:59.504863", "type": "system_start", "user": "system", "message": "Lexicon v5 dashboard started"}
+{"time": "2026-09-24T00:41:51.740516+00:00", "type": "system_start", "user": "system", "message": "Lexicon v5 dashboard started"}
+{"time": "2026-09-24T00:42:20.170070+00:00", "type": "system_start", "user": "system", "message": "Lexicon v5 dashboard started"}
+{"time": "2026-09-24T00:42:20.543947+00:00", "type": "system_start", "user": "system", "message": "Lexicon v5 dashboard started"}
+{"time": "2026-09-24T00:43:30.372767+00:00", "type": "login", "user": "admin", "message": "User logged in"}
+{"time": "2026-09-24T00:43:30.387994+00:00", "type": "view_dashboard", "user": "admin", "message": "Dashboard viewed"}
+{"time": "2026-09-24T00:43:30.767967+00:00", "type": "stats_fetch", "user": "admin", "message": "Stats data fetched"}
+{"time": "2026-09-24T00:44:07.157293+00:00", "type": "export_csv", "user": "admin", "message": "CSV exported"}
+{"time": "2026-09-24T00:46:24.248046+00:00", "type": "export_csv", "user": "admin", "message": "CSV exported"}
+{"time": "2026-09-24T00:58:38.441153+00:00", "type": "system_start", "user": "system", "message": "Lexicon v5 dashboard started"}
+{"time": "2026-09-24T00:58:38.966442+00:00", "type": "system_start", "user": "system", "message": "Lexicon v5 dashboard started"}
+{"time": "2026-09-24T01:02:46.327682+00:00", "type": "system_start", "user": "system", "message": "Lexicon v5 dashboard started"}
+{"time": "2026-09-24T01:02:46.921929+00:00", "type": "system_start", "user": "system", "message": "Lexicon v5 dashboard started"}
+{"time": "2026-09-24T01:03:48.063727+00:00", "type": "login", "user": "admin", "message": "User logged in"}
+{"time": "2026-09-24T01:03:48.092904+00:00", "type": "view_dashboard", "user": "admin", "message": "Dashboard viewed"}
+{"time": "2026-09-24T01:03:48.314981+00:00", "type": "stats_fetch", "user": "admin", "message": "Stats data fetched"}
+{"time": "2026-09-24T01:04:15.763729+00:00", "type": "export_csv", "user": "admin", "message": "CSV exported"}
+{"time": "2026-09-24T01:42:00.082578+00:00", "type": "system_start", "user": "system", "message": "Lexicon v5 dashboard started"}
+{"time": "2026-09-24T01:42:00.104730+00:00", "type": "system_start", "user": "system", "message": "Lexicon v5 dashboard started"}
+{"time": "2026-09-24T01:44:34.032956+00:00", "type": "system_start", "user": "system", "message": "Lexicon v5 dashboard started"}
+{"time": "2026-09-24T01:44:34.511476+00:00", "type": "system_start", "user": "system", "message": "Lexicon v5 dashboard started"}
+{"time": "2026-09-24T01:46:02.496292+00:00", "type": "system_start", "user": "system", "message": "Lexicon v5 dashboard started"}
+{"time": "2026-09-24T01:46:02.968662+00:00", "type": "system_start", "user": "system", "message": "Lexicon v5 dashboard started"}
+{"time": "2026-09-24T01:53:22.532674+00:00", "type": "system_start", "user": "system", "message": "Lexicon v5 dashboard started"}
+{"time": "2026-09-24T01:53:48.509862+00:00", "type": "system_start", "user": "system", "message": "Lexicon v5 dashboard started"}
+{"time": "2026-09-24T01:53:49.052765+00:00", "type": "system_start", "user": "system", "message": "Lexicon v5 dashboard started"}
+{"time": "2026-09-24T01:54:31.544117+00:00", "type": "login", "user": "admin", "message": "User logged in"}
+{"time": "2026-09-24T01:54:31.562607+00:00", "type": "view_dashboard", "user": "admin", "message": "Dashboard viewed"}
+{"time": "2026-09-24T01:54:31.811809+00:00", "type": "stats_fetch", "user": "admin", "message": "Stats data fetched"}
+{"time": "2026-09-24T01:55:13.135512+00:00", "type": "export_csv", "user": "admin", "message": "CSV exported"}
+{"time": "2026-09-24T01:55:59.437022+00:00", "type": "export_csv", "user": "admin", "message": "CSV exported"}
+{"time": "2026-09-24T06:32:19.575281+00:00", "type": "system_start", "user": "system", "message": "Lexicon v5 dashboard started"}
+{"time": "2026-09-24T06:45:58.930525+00:00", "type": "system_start", "user": "system", "message": "Lexicon v5 dashboard started"}
+{"time": "2026-09-24T06:52:07.650144+00:00", "type": "system_start", "user": "system", "message": "Lexicon v5 dashboard started"}
+{"time": "2026-09-24T06:52:08.172544+00:00", "type": "system_start", "user": "system", "message": "Lexicon v5 dashboard started"}
+{"time": "2026-09-24T06:59:56.911429+00:00", "type": "system_start", "user": "system", "message": "Lexicon v5 dashboard started"}
+{"time": "2026-09-24T06:59:57.401687+00:00", "type": "system_start", "user": "system", "message": "Lexicon v5 dashboard started"}
