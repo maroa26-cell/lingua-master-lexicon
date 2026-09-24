@@ -2,118 +2,189 @@ from flask import Flask, render_template, request, jsonify
 import csv
 import os
 from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import letter
 
 app = Flask(__name__)
 
-DB_NAME = "lingua-master-lexicon.csv"
-FIELDNAMES = ["english", "swahili", "category"]
+# ---------------------------------------------------------
+#  GLOBAL CONFIGURATION
+# ---------------------------------------------------------
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+CSV_FILE = os.path.join(BASE_DIR, "lingua-master-lexicon.csv")
 
-# ----------------------------------------
-# HELPER FUNCTIONS
-# ----------------------------------------
+FIELDNAMES = ["English", "Swahili", "Category"]
 
-def read_csv():
-    data = []
-    with open(DB_NAME, newline='', encoding='utf-8') as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            data.append(row)
-    return data
 
-def write_csv(data):
-    with open(DB_NAME, "w", newline='', encoding='utf-8') as f:
-        writer = csv.DictWriter(f, fieldnames=FIELDNAMES)
-        writer.writeheader()
-        writer.writerows(data)
-
-# ----------------------------------------
-# ROUTES
-# ----------------------------------------
-
+# ---------------------------------------------------------
+#  HOME ROUTE (Railway Root Fix)
+# ---------------------------------------------------------
 @app.route("/")
 def home():
     return render_template("lexicon_admin.html")
 
-@app.route("/get_entries")
+
+# ---------------------------------------------------------
+#  READ ALL ENTRIES (Enterprise Optimized)
+# ---------------------------------------------------------
+@app.route("/entries", methods=["GET"])
 def get_entries():
-    data = read_csv()
-    return jsonify({"entries": data, "count": len(data)})
+    if not os.path.exists(CSV_FILE):
+        return jsonify([])
 
-@app.route("/add_entry", methods=["POST"])
+    entries = []
+    with open(CSV_FILE, "r", encoding="utf-8") as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            entries.append({
+                "English": row.get("English", "").strip(),
+                "Swahili": row.get("Swahili", "").strip(),
+                "Category": row.get("Category", "").strip()
+            })
+
+    return jsonify(entries)
+
+
+# ---------------------------------------------------------
+#  ADD NEW ENTRY (Enterprise Validation)
+# ---------------------------------------------------------
+@app.route("/add", methods=["POST"])
 def add_entry():
-    english = request.form.get("english", "").strip()
-    swahili = request.form.get("swahili", "").strip()
-    category = request.form.get("category", "").strip()
+    data = request.json
 
-    if not english or not swahili:
-        return jsonify({"error": "English and Swahili fields are required"}), 400
+    # Validation
+    if not data or not data.get("English") or not data.get("Swahili"):
+        return jsonify({"error": "Invalid entry"}), 400
 
-    data = read_csv()
-    data.append({"english": english, "swahili": swahili, "category": category})
-    write_csv(data)
+    with open(CSV_FILE, "a", newline="", encoding="utf-8") as file:
+        writer = csv.DictWriter(file, fieldnames=FIELDNAMES)
+        writer.writerow({
+            "English": data["English"].strip(),
+            "Swahili": data["Swahili"].strip(),
+            "Category": data.get("Category", "").strip()
+        })
 
     return jsonify({"message": "Entry added successfully"})
 
-@app.route("/delete_entry", methods=["POST"])
+
+# ---------------------------------------------------------
+#  DELETE ENTRY (Enterprise Safe Delete)
+# ---------------------------------------------------------
+@app.route("/delete", methods=["POST"])
 def delete_entry():
-    english = request.form.get("english", "").strip()
-    data = read_csv()
+    target = request.json.get("English")
+    if not target:
+        return jsonify({"error": "Missing English field"}), 400
 
-    new_data = [row for row in data if row["english"].lower() != english.lower()]
-    write_csv(new_data)
+    rows = []
+    found = False
 
-    return jsonify({"message": f"Deleted entries for '{english}'"})
+    with open(CSV_FILE, "r", encoding="utf-8") as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            if row["English"] != target:
+                rows.append(row)
+            else:
+                found = True
 
-@app.route("/update_entry", methods=["POST"])
+    with open(CSV_FILE, "w", newline="", encoding="utf-8") as file:
+        writer = csv.DictWriter(file, fieldnames=FIELDNAMES)
+        writer.writeheader()
+        writer.writerows(rows)
+
+    if not found:
+        return jsonify({"message": "Entry not found"}), 404
+
+    return jsonify({"message": "Entry deleted"})
+
+
+# ---------------------------------------------------------
+#  UPDATE ENTRY (Enterprise Replace Logic)
+# ---------------------------------------------------------
+@app.route("/update", methods=["POST"])
 def update_entry():
-    english = request.form.get("english", "").strip()
-    swahili = request.form.get("swahili", "").strip()
-    category = request.form.get("category", "").strip()
+    old_word = request.json.get("old_English")
+    new_data = request.json.get("new_data")
 
-    data = read_csv()
+    if not old_word or not new_data:
+        return jsonify({"error": "Invalid update request"}), 400
+
+    rows = []
     updated = False
 
-    for row in data:
-        if row["english"].lower() == english.lower():
-            row["swahili"] = swahili
-            row["category"] = category
-            updated = True
+    with open(CSV_FILE, "r", encoding="utf-8") as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            if row["English"] == old_word:
+                rows.append({
+                    "English": new_data.get("English", "").strip(),
+                    "Swahili": new_data.get("Swahili", "").strip(),
+                    "Category": new_data.get("Category", "").strip()
+                })
+                updated = True
+            else:
+                rows.append(row)
 
-    write_csv(data)
+    with open(CSV_FILE, "w", newline="", encoding="utf-8") as file:
+        writer = csv.DictWriter(file, fieldnames=FIELDNAMES)
+        writer.writeheader()
+        writer.writerows(rows)
 
-    if updated:
-        return jsonify({"message": "Entry updated successfully"})
-    else:
-        return jsonify({"error": "Word not found"}), 404
+    if not updated:
+        return jsonify({"message": "Entry not found"}), 404
 
-@app.route("/export_pdf")
+    return jsonify({"message": "Entry updated"})
+
+
+# ---------------------------------------------------------
+#  EXPORT PDF (Enterprise Pagination)
+# ---------------------------------------------------------
+@app.route("/export/pdf", methods=["GET"])
 def export_pdf():
-    data = read_csv()
-    filename = "MasterLexiconExport.pdf"
+    pdf_path = os.path.join(BASE_DIR, "MasterLexiconExport.pdf")
+    c = canvas.Canvas(pdf_path, pagesize=letter)
+    width, height = letter
 
-    c = canvas.Canvas(filename)
-    c.setFont("Helvetica", 12)
-
-    y = 800
+    y = height - 50
+    c.setFont("Helvetica-Bold", 14)
     c.drawString(50, y, "Master Lexicon Export")
-    y -= 30
+    y -= 40
 
-    for row in data:
-        line = f"{row['english']}  -  {row['swahili']}  ({row['category']})"
-        c.drawString(50, y, line)
-        y -= 20
-        if y < 50:
-            c.showPage()
-            c.setFont("Helvetica", 12)
-            y = 800
+    c.setFont("Helvetica", 11)
+
+    with open(CSV_FILE, "r", encoding="utf-8") as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            line = f"{row['English']} - {row['Swahili']} ({row['Category']})"
+            c.drawString(50, y, line)
+            y -= 18
+
+            if y < 50:
+                c.showPage()
+                c.setFont("Helvetica", 11)
+                y = height - 50
 
     c.save()
+    return jsonify({"message": "PDF exported", "file": "MasterLexiconExport.pdf"})
 
-    return jsonify({"message": "PDF exported successfully", "file": filename})
 
-# ----------------------------------------
-# RUN SERVER
-# ----------------------------------------
+# ---------------------------------------------------------
+#  EXPORT CSV
+# ---------------------------------------------------------
+@app.route("/export/csv", methods=["GET"])
+def export_csv():
+    return jsonify({"message": "CSV export ready", "file": "lingua-master-lexicon.csv"})
 
+
+# ---------------------------------------------------------
+#  EXPORT EXCEL (CSV FORMAT)
+# ---------------------------------------------------------
+@app.route("/export/excel", methods=["GET"])
+def export_excel():
+    return jsonify({"message": "Excel export ready", "file": "lingua-master-lexicon.csv"})
+
+
+# ---------------------------------------------------------
+#  LOCAL DEVELOPMENT ONLY
+# ---------------------------------------------------------
 if __name__ == "__main__":
     app.run(debug=True, port=5001)
