@@ -1,5 +1,5 @@
 # ============================================================
-# MASTER LEXICON — SUPER PREMIUM ULTRA ENTERPRISE INTERNATIONAL v4
+# MASTER LEXICON — SUPER PREMIUM ULTRA GLOBAL ENTERPRISE v5
 # ============================================================
 
 from flask import (
@@ -10,11 +10,13 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import or_, func
 from flask_migrate import Migrate
 from dotenv import load_dotenv
+from werkzeug.security import generate_password_hash, check_password_hash
 import pandas as pd
 import csv
 import io
 import os
 from datetime import datetime
+from functools import wraps
 
 # ============================================================
 # LOAD ENVIRONMENT VARIABLES (.env)
@@ -32,7 +34,6 @@ SECRET_KEY = os.getenv("SECRET_KEY", "DEFAULT_ENTERPRISE_KEY")
 app = Flask(__name__)
 app.secret_key = SECRET_KEY
 
-# DATABASE (SQLite local, PostgreSQL production)
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -44,12 +45,21 @@ migrate = Migrate(app, db)
 # ============================================================
 
 class User(db.Model):
+    __tablename__ = "users"  # table mpya ya enterprise users
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     role = db.Column(db.String(20), nullable=False)  # admin / translator / viewer
-    password = db.Column(db.String(120), nullable=False)
+    password_hash = db.Column(db.String(255), nullable=False)
+
+    def set_password(self, raw_password: str):
+        self.password_hash = generate_password_hash(raw_password)
+
+    def check_password(self, raw_password: str) -> bool:
+        return check_password_hash(self.password_hash, raw_password)
+
 
 class Word(db.Model):
+    __tablename__ = "lexicon_entries"
     id = db.Column(db.Integer, primary_key=True)
     english = db.Column(db.String(120), nullable=False)
     swahili = db.Column(db.String(120), nullable=False)
@@ -60,14 +70,20 @@ class Word(db.Model):
     edit_count = db.Column(db.Integer, default=0)
 
 # ============================================================
-# INIT DEFAULT USERS
+# INIT DEFAULT USERS (ADMIN / TRANSLATOR / VIEWER)
 # ============================================================
 
 def init_default_users():
     if not User.query.filter_by(username="admin").first():
-        admin = User(username="admin", role="admin", password="Admin2026")
-        translator = User(username="translator", role="translator", password="Trans2026")
-        viewer = User(username="viewer", role="viewer", password="View2026")
+        admin = User(username="admin", role="admin")
+        admin.set_password("Admin2026")
+
+        translator = User(username="translator", role="translator")
+        translator.set_password("Trans2026")
+
+        viewer = User(username="viewer", role="viewer")
+        viewer.set_password("View2026")
+
         db.session.add(admin)
         db.session.add(translator)
         db.session.add(viewer)
@@ -77,14 +93,28 @@ def init_default_users():
 # AUTH + ROLE DECORATOR
 # ============================================================
 
+def require_role(*roles):
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            if 'role' not in session:
+                flash("⚠️ Please log in first.", "error")
+                return redirect(url_for('login'))
+            if session['role'] not in roles:
+                flash("⚠️ You do not have permission for this action.", "error")
+                return redirect(url_for('dashboard'))
+            return func(*args, **kwargs)
+        return wrapper
+    return decorator
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        uname = request.form.get('username')
-        pwd = request.form.get('password')
+        uname = request.form.get('username', '').strip()
+        pwd = request.form.get('password', '').strip()
 
-        user = User.query.filter_by(username=uname, password=pwd).first()
-        if user:
+        user = User.query.filter_by(username=uname).first()
+        if user and user.check_password(pwd):
             session['user_id'] = user.id
             session['username'] = user.username
             session['role'] = user.role
@@ -100,19 +130,6 @@ def logout():
     session.clear()
     flash("ℹ️ Logged out.", "info")
     return redirect(url_for('login'))
-
-def require_role(*roles):
-    def decorator(func):
-        def wrapper(*args, **kwargs):
-            if 'role' not in session:
-                return redirect(url_for('login'))
-            if session['role'] not in roles:
-                flash("⚠️ You do not have permission for this action.", "error")
-                return redirect(url_for('dashboard'))
-            return func(*args, **kwargs)
-        wrapper.__name__ = func.__name__
-        return wrapper
-    return decorator
 
 # ============================================================
 # DASHBOARD + SEARCH ENGINE v3
@@ -322,7 +339,7 @@ def export_csv():
     for w in words:
         writer.writerow([w.english, w.swahili, w.category, w.search_count, w.edit_count])
     response = make_response(output.getvalue())
-    response.headers["Content-Disposition"] = "attachment; filename=lexicon_v4.csv"
+    response.headers["Content-Disposition"] = "attachment; filename=lexicon_v5.csv"
     response.headers["Content-Type"] = "text/csv"
     return response
 
@@ -341,7 +358,7 @@ def export_excel():
     with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
         df.to_excel(writer, index=False, sheet_name='Lexicon')
     response = make_response(output.getvalue())
-    response.headers["Content-Disposition"] = "attachment; filename=lexicon_v4.xlsx"
+    response.headers["Content-Disposition"] = "attachment; filename=lexicon_v5.xlsx"
     response.headers["Content-Type"] = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     return response
 
