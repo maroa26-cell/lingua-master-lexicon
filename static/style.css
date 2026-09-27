@@ -1,106 +1,468 @@
-/* ============================
-   MASTER LEXICON — DARK MODE UI
-   ============================ */
+/* ============================================================
+   MASTER LEXICON — GLOBAL ENTERPRISE UI (FULL)
+   ============================================================ */
 
+/* BASE */
 body {
-    background-color: #121212;
-    color: #e6e6e6;
+    margin: 0;
     font-family: 'Segoe UI', sans-serif;
+    color: #eee;
+    background: #111;
+    transition: background 0.3s, color 0.3s;
+}
+
+/* ============================================================
+   LOGIN PAGE — ENTERPRISE KISWAHILI EDITION
+   ============================================================ */
+
+.login-body {
+    background: radial-gradient(circle at center, #000 0%, #111 50%, #222 100%);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-wrapper {
+    text-align: center;
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+.login-logo {
+    margin-bottom: 25px;
+}
+
+.logo-icon {
+    font-size: 55px;
+    color: gold;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.login-logo h2 {
+    font-size: 28px;
+    color: gold;
     margin: 0;
-    padding: 0;
 }
 
-/* NAVBAR */
-.navbar {
-    background-color: #1f1f1f;
-    padding: 15px;
-    border-bottom: 1px solid #333;
+.login-subtitle {
+    font-size: 15px;
+    color: #ccc;
+    margin-top: 5px;
 }
 
-.navbar h3 {
-    color: #ffffff;
-    margin: 0;
+.login-card {
+    background: #fff;
+    width: 360px;
+    padding: 30px;
+    border-radius: 14px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.35);
+    animation: slideUp 0.7s ease;
+    color: #333;
 }
 
-/* LOGO */
-.logo {
-    width: 80px;
-    height: 80px;
-    border-radius: 12px;
-    box-shadow: 0 0 15px rgba(0, 150, 255, 0.4);
-    transition: transform 0.3s ease;
+.input-group {
+    position: relative;
+    margin-bottom: 18px;
 }
 
-.logo:hover {
-    transform: scale(1.08);
+.input-icon {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    font-size: 18px;
+    color: gold;
 }
 
-/* CARDS */
-.card {
-    background-color: #1f1f1f;
-    border: 1px solid #333;
-    border-radius: 8px;
+.login-card input {
+    width: 100%;
+    padding: 12px 12px 12px 40px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+    transition: 0.3s;
 }
 
-/* INPUTS */
-input.form-control {
-    background-color: #2a2a2a;
-    color: #ffffff;
-    border: 1px solid #444;
+.login-card input:focus {
+    border-color: gold;
+    box-shadow: 0 0 6px gold;
 }
 
-input.form-control:focus {
-    background-color: #333;
-    border-color: #666;
+.login-btn {
+    width: 100%;
+    padding: 14px;
+    background: gold;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.login-btn:hover {
+    background: #000;
+    color: gold;
+}
+
+.login-error {
+    margin-top: 12px;
+    color: red;
+    font-weight: bold;
+}
+
+.exit-link {
+    display: block;
+    margin-top: 20px;
+    color: gold;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.exit-link:hover {
+    color: #000;
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(40px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* ============================================================
+   DASHBOARD — GLOBAL ENTERPRISE STANDARD
+   ============================================================ */
+
+.dashboard-body {
+    background: linear-gradient(135deg, #000, #111, #222);
+    color: #eee;
+    display: flex;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 260px;
+    background: #0f0f0f;
+    color: gold;
+    height: 100vh;
+    position: fixed;
+    padding: 25px;
+    box-shadow: 2px 0 12px rgba(0,0,0,0.45);
+}
+
+.sidebar h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 22px;
+}
+
+.sidebar a {
+    display: block;
+    padding: 12px;
+    margin: 10px 0;
+    background: #1c1c1c;
     color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: 0.3s;
 }
 
-/* BUTTONS */
-.btn-primary {
-    background-color: #007bff;
-    border: none;
+.sidebar a:hover,
+.sidebar a.active {
+    background: gold;
+    color: #000;
 }
 
-.btn-primary:hover {
-    background-color: #0069d9;
+/* DARK MODE SIDEBAR */
+body.dark .sidebar {
+    background: #000;
 }
 
-.btn-danger {
-    background-color: #d9534f;
-    border: none;
+body.dark .sidebar a {
+    background: #222;
 }
 
-.btn-danger:hover {
-    background-color: #c9302c;
+/* DARK MODE TOGGLE */
+.toggle-container {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 55px;
+    height: 28px;
+}
+
+.switch input {
+    display: none;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    background: #ccc;
+    border-radius: 34px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: 0.4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 3px;
+    bottom: 3px;
+    background: white;
+    border-radius: 50%;
+    transition: 0.4s;
+}
+
+input:checked + .slider {
+    background: gold;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.toggle-label {
+    display: block;
+    margin-top: 10px;
+    font-size: 14px;
+    color: gold;
+}
+
+/* MAIN */
+.main {
+    margin-left: 280px;
+    padding: 40px;
+    width: calc(100% - 280px);
+}
+
+.page-title {
+    font-size: 26px;
+    color: gold;
+    margin-bottom: 20px;
+}
+
+/* EXPORT BUTTONS */
+.export-box {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.export-btn {
+    padding: 12px 20px;
+    background: gold;
+    color: #000;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.export-btn:hover {
+    background: #000;
+    color: gold;
+}
+
+/* FILTER BOX */
+.filter-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    color: #eee;
+}
+
+.filter-box select {
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
 }
 
 /* TABLE */
-.table-dark {
-    background-color: #1f1f1f;
+.enterprise-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
-.table-dark th {
-    background-color: #2a2a2a;
-    color: #ffffff;
+.enterprise-table th {
+    background: #000;
+    color: gold;
+    padding: 14px;
+    font-size: 16px;
 }
 
-.table-dark td {
-    background-color: #1f1f1f;
-    color: #e6e6e6;
+.enterprise-table td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    color: #333;
 }
 
-/* SEARCH BAR */
-input[type="text"] {
-    background-color: #2a2a2a;
-    color: #ffffff;
+.enterprise-table tr:hover {
+    background: #f9f9f9;
 }
 
-/* LOGIN CARD */
-.card.bg-secondary {
-    background-color: #1f1f1f !important;
+/* SORT ICONS */
+.enterprise-table th a {
+    color: gold;
+    margin-left: 6px;
+    text-decoration: none;
+    font-size: 13px;
 }
 
-/* CENTER LOGIN FORM */
-.container .card {
-    box-shadow: 0 0 10px rgba(0,0,0,0.6);
+.enterprise-table th a:hover {
+    color: #fff;
+}
+
+/* ACTION ICONS */
+.edit-icon {
+    color: #007bff;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.edit-icon:hover {
+    color: #0056b3;
+}
+
+.delete-icon {
+    color: red;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.delete-icon:hover {
+    color: darkred;
+}
+
+/* PAGINATION */
+.pagination {
+    margin-top: 25px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.page-btn {
+    padding: 10px 20px;
+    background: gold;
+    color: #000;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.page-btn:hover {
+    background: #000;
+    color: gold;
+}
+
+.page-number {
+    font-weight: bold;
+    color: gold;
+}
+
+/* DARK MODE MAIN */
+body.dark {
+    background: #000;
+    color: #eee;
+}
+
+body.dark .main {
+    background: #000;
+}
+
+body.dark .enterprise-table {
+    background: #222;
+}
+
+body.dark .enterprise-table td {
+    color: #eee;
+    border-bottom: 1px solid #333;
+}
+
+body.dark .enterprise-table tr:hover {
+    background: #333;
+}
+
+/* ============================================================
+   SETTINGS PAGE — ENTERPRISE STANDARD
+   ============================================================ */
+
+.settings-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+}
+
+.settings-card {
+    background: #fff;
+    color: #333;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: 0.3s;
+}
+
+.settings-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+}
+
+.settings-card h2 {
+    color: gold;
+    margin-bottom: 10px;
+}
+
+.settings-select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+}
+
+.settings-btn {
+    padding: 10px 20px;
+    background: gold;
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.settings-btn:hover {
+    background: #000;
+    color: gold;
+}
+
+.security-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.security-list li {
+    margin-bottom: 8px;
+    font-weight: 500;
 }

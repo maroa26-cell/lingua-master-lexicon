@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard – Master Lexicon v3</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: #0d1117;
+            color: #e6edf3;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 240px;
+            background: #161b22;
+            padding: 25px;
+            height: 100vh;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.4);
+        }
+
+        .sidebar h2 {
+            margin-top: 0;
+            color: #58a6ff;
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 12px 10px;
+            margin-bottom: 8px;
+            color: #c9d1d9;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: 0.25s;
+            font-size: 15px;
+        }
+
+        .sidebar a:hover {
+            background: #21262d;
+            color: #58a6ff;
+        }
+
+        .main {
+            flex: 1;
+            padding: 40px;
+        }
+
+        .alert {
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .success { background: #238636; }
+        .error { background: #b62324; }
+        .info { background: #1f6feb; }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .top-bar h3 {
+            margin: 0;
+            font-size: 24px;
+            color: #58a6ff;
+        }
+
+        .search-input {
+            padding: 8px 10px;
+            border-radius: 6px;
+            border: 1px solid #30363d;
+            background: #0d1117;
+            color: #e6edf3;
+            font-size: 14px;
+            width: 260px;
+        }
+
+        .export-btn {
+            padding: 10px 14px;
+            border-radius: 6px;
+            text-decoration: none;
+            color: white;
+            font-size: 14px;
+            margin-left: 10px;
+            transition: 0.25s;
+        }
+
+        .csv-btn { background: #1f6feb; }
+        .csv-btn:hover { background: #388bfd; }
+
+        .excel-btn { background: #238636; }
+        .excel-btn:hover { background: #2ea043; }
+
+        .filters {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .filters select {
+            padding: 10px;
+            background: #0d1117;
+            border: 1px solid #30363d;
+            color: #e6edf3;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #161b22;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 14px;
+            text-align: left;
+            border-bottom: 1px solid #30363d;
+        }
+
+        th {
+            color: #58a6ff;
+            cursor: pointer;
+            user-select: none;
+            transition: 0.25s;
+        }
+
+        th:hover {
+            color: #79c0ff;
+        }
+
+        tr:hover {
+            background: #21262d;
+        }
+
+        .sort-icon {
+            margin-left: 6px;
+            font-size: 12px;
+            opacity: 0.7;
+        }
+
+        .btn {
+            padding: 8px 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            color: white;
+            font-size: 14px;
+            transition: 0.25s;
+        }
+
+        .edit-btn { background: #1f6feb; }
+        .edit-btn:hover { background: #388bfd; }
+
+        .delete-btn { background: #b62324; }
+        .delete-btn:hover { background: #d63939; }
+
+        .pagination {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .pagination a {
+            padding: 8px 12px;
+            background: #21262d;
+            color: #e6edf3;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: 0.25s;
+        }
+
+        .pagination a:hover {
+            background: #30363d;
+        }
+
+        .suggest-box {
+            position: absolute;
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            margin-top: 2px;
+            width: 260px;
+            z-index: 10;
+        }
+
+        .suggest-item {
+            padding: 8px 10px;
+            cursor: pointer;
+        }
+
+        .suggest-item:hover {
+            background: #21262d;
+        }
+
+        .suggest-section-title {
+            font-size: 11px;
+            color: #8b949e;
+            padding: 4px 10px;
+            border-top: 1px solid #30363d;
+        }
+    </style>
+
+    <script>
+        function applySort(field) {
+            const url = new URL(window.location.href);
+            const currentDir = url.searchParams.get("dir") || "asc";
+            const newDir = currentDir === "asc" ? "desc" : "asc";
+
+            url.searchParams.set("sort", field);
+            url.searchParams.set("dir", newDir);
+
+            window.location.href = url.toString();
+        }
+
+        function applyCategory() {
+            const category = document.getElementById("categoryFilter").value;
+            const url = new URL(window.location.href);
+
+            url.searchParams.set("category", category);
+            window.location.href = url.toString();
+        }
+
+        async function performLiveSearch() {
+            const query = document.getElementById('liveSearchInput').value.trim();
+            const tbody = document.querySelector('tbody');
+
+            if (query.length === 0) {
+                window.location.href = "/";
+                return;
+            }
+
+            const response = await fetch(`/live_search?q=${encodeURIComponent(query)}`);
+            const data = await response.json();
+
+            tbody.innerHTML = '';
+
+            data.results.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${highlightQuery(item.english)}</td>
+                    <td>${highlightQuery(item.swahili)}</td>
+                    <td>${highlightQuery(item.category)}</td>
+                    <td>
+                        ${renderActions(item.id)}
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        async function loadSuggestions() {
+            const query = document.getElementById('liveSearchInput').value.trim();
+            const box = document.getElementById('suggestBox');
+
+            if (query.length < 1) {
+                box.innerHTML = '';
+                box.style.display = 'none';
+                return;
+            }
+
+            const response = await fetch(`/suggest?q=${encodeURIComponent(query)}`);
+            const data = await response.json();
+
+            box.innerHTML = '';
+            box.style.display = 'block';
+
+            if (data.suggestions.length > 0) {
+                const title = document.createElement('div');
+                title.className = 'suggest-section-title';
+                title.textContent = 'Suggestions';
+                box.appendChild(title);
+
+                data.suggestions.forEach(s => {
+                    const div = document.createElement('div');
+                    div.className = 'suggest-item';
+                    div.textContent = s;
+                    div.onclick = () => {
+                        document.getElementById('liveSearchInput').value = s;
+                        box.style.display = 'none';
+                    };
+                    box.appendChild(div);
+                });
+            }
+
+            if (data.categories.length > 0) {
+                const title2 = document.createElement('div');
+                title2.className = 'suggest-section-title';
+                title2.textContent = 'Top Categories';
+                box.appendChild(title2);
+
+                data.categories.forEach(c => {
+                    const div = document.createElement('div');
+                    div.className = 'suggest-item';
+                    div.textContent = c;
+                    div.onclick = () => {
+                        document.getElementById('categoryFilter').value = c;
+                        applyCategory();
+                        box.style.display = 'none';
+                    };
+                    box.appendChild(div);
+                });
+            }
+
+            if (data.recent.length > 0) {
+                const title3 = document.createElement('div');
+                title3.className = 'suggest-section-title';
+                title3.textContent = 'Recently Added';
+                box.appendChild(title3);
+
+                data.recent.forEach(r => {
+                    const div = document.createElement('div');
+                    div.className = 'suggest-item';
+                    div.textContent = r;
+                    div.onclick = () => {
+                        document.getElementById('liveSearchInput').value = r;
+                        box.style.display = 'none';
+                    };
+                    box.appendChild(div);
+                });
+            }
+        }
+
+        function renderActions(id) {
+            const role = "{{ role }}";
+            if (role === "admin") {
+                return `
+                    <a href="/edit/${id}" class="btn edit-btn">Edit</a>
+                    <a href="/delete/${id}" class="btn delete-btn">Delete</a>
+                `;
+            } else if (role === "translator") {
+                return `
+                    <a href="/edit/${id}" class="btn edit-btn">Edit</a>
+                `;
+            } else {
+                return `View only`;
+            }
+        }
+
+        function highlightQuery(text) {
+            const q = document.getElementById('liveSearchInput').value.trim();
+            if (!q) return text;
+            const regex = new RegExp(`(${q})`, 'gi');
+            return text.replace(regex, '<span style="background:#1f6feb; padding:2px 4px; border-radius:4px;">$1</span>');
+        }
+    </script>
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <h2>Master Lexicon v3</h2>
+        <a href="/">Dashboard</a>
+        {% if role == 'admin' or role == 'translator' %}
+        <a href="/add_word_page">Add Word</a>
+        {% endif %}
+        {% if role == 'admin' %}
+        <a href="/settings">Settings</a>
+        {% endif %}
+        <a href="/analytics">Analytics</a>
+        <a href="/logout">Logout ({{ role }})</a>
+    </div>
+
+    <div class="main">
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <div class="top-bar">
+            <h3>Lexicon Dashboard</h3>
+
+            <div style="display:flex; align-items:center; gap:10px; position:relative;">
+                <form action="/search" method="GET">
+                    <input
+                        type="text"
+                        id="liveSearchInput"
+                        name="q"
+                        placeholder="Search English, Swahili, Category..."
+                        value="{{ search_query if search_query is defined else '' }}"
+                        class="search-input"
+                        oninput="performLiveSearch(); loadSuggestions();"
+                    >
+                </form>
+
+                <div id="suggestBox" class="suggest-box" style="display:none;"></div>
+
+                {% if role == 'admin' %}
+                <a href="/export_csv" class="export-btn csv-btn">📤 Export CSV</a>
+                <a href="/export_excel" class="export-btn excel-btn">📊 Export Excel</a>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="filters">
+            <select id="categoryFilter" onchange="applyCategory()">
+                <option value="all" {% if category_filter == 'all' %}selected{% endif %}>All Categories</option>
+                {% for cat in categories %}
+                    <option value="{{ cat }}" {% if category_filter == cat %}selected{% endif %}>
+                        {{ cat }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th onclick="applySort('english')">
+                        English
+                        {% if sort_field == 'english' %}
+                            <span class="sort-icon">{{ '▲' if direction == 'asc' else '▼' }}</span>
+                        {% endif %}
+                    </th>
+                    <th onclick="applySort('swahili')">
+                        Swahili
+                        {% if sort_field == 'swahili' %}
+                            <span class="sort-icon">{{ '▲' if direction == 'asc' else '▼' }}</span>
+                        {% endif %}
+                    </th>
+                    <th onclick="applySort('category')">
+                        Category
+                        {% if sort_field == 'category' %}
+                            <span class="sort-icon">{{ '▲' if direction == 'asc' else '▼' }}</span>
+                        {% endif %}
+                    </th>
+                    <th onclick="applySort('search_count')">
+                        Search Count
+                        {% if sort_field == 'search_count' %}
+                            <span class="sort-icon">{{ '▲' if direction == 'asc' else '▼' }}</span>
+                        {% endif %}
+                    </th>
+                    <th onclick="applySort('edit_count')">
+                        Edit Count
+                        {% if sort_field == 'edit_count' %}
+                            <span class="sort-icon">{{ '▲' if direction == 'asc' else '▼' }}</span>
+                        {% endif %}
+                    </th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for word in words.items %}
+                <tr>
+                    <td>{{ word.english }}</td>
+                    <td>{{ word.swahili }}</td>
+                    <td>{{ word.category }}</td>
+                    <td>{{ word.search_count }}</td>
+                    <td>{{ word.edit_count }}</td>
+                    <td>
+                        {% if role == 'admin' %}
+                            <a href="/edit/{{ word.id }}" class="btn edit-btn">Edit</a>
+                            <a href="/delete/{{ word.id }}" class="btn delete-btn">Delete</a>
+                        {% elif role == 'translator' %}
+                            <a href="/edit/{{ word.id }}" class="btn edit-btn">Edit</a>
+                        {% else %}
+                            View only
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="pagination">
+            {% if words.has_prev %}
+                <a href="?page={{ words.prev_num }}&sort={{ sort_field }}&dir={{ direction }}&category={{ category_filter }}">Previous</a>
+            {% endif %}
+            <span>Page {{ words.page }} of {{ words.pages }}</span>
+            {% if words.has_next %}
+                <a href="?page={{ words.next_num }}&sort={{ sort_field }}&dir={{ direction }}&category={{ category_filter }}">Next</a>
+            {% endif %}
+        </div>
+
+    </div>
+
+</body>
+</html>

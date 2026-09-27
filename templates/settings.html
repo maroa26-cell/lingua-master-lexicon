@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Settings – Master Lexicon v3</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: #0d1117;
+            color: #e6edf3;
+            display: flex;
+        }
+        .sidebar {
+            width: 240px;
+            background: #161b22;
+            padding: 25px;
+            height: 100vh;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.4);
+        }
+        .sidebar h2 {
+            margin-top: 0;
+            color: #58a6ff;
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+        .sidebar a {
+            display: block;
+            padding: 12px 10px;
+            margin-bottom: 8px;
+            color: #c9d1d9;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: 0.25s;
+            font-size: 15px;
+        }
+        .sidebar a:hover {
+            background: #21262d;
+            color: #58a6ff;
+        }
+        .main {
+            flex: 1;
+            padding: 40px;
+        }
+        h3 {
+            color: #58a6ff;
+            margin-bottom: 20px;
+        }
+        .setting-block {
+            background: #161b22;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        select {
+            padding: 10px;
+            background: #0d1117;
+            border: 1px solid #30363d;
+            color: #e6edf3;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        button {
+            margin-top: 15px;
+            padding: 10px 14px;
+            border: none;
+            border-radius: 6px;
+            background: #1f6feb;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+        button:hover {
+            background: #388bfd;
+        }
+        .alert {
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        .success { background: #238636; }
+        .error { background: #b62324; }
+        .info { background: #1f6feb; }
+
+        .theme-preview {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .theme-box {
+            width: 40px;
+            height: 40px;
+            border-radius: 6px;
+            border: 2px solid #30363d;
+        }
+        .theme-gold { background: linear-gradient(135deg, #f1c40f, #f39c12); }
+        .theme-blue { background: linear-gradient(135deg, #3498db, #2980b9); }
+        .theme-green { background: linear-gradient(135deg, #2ecc71, #27ae60); }
+        .theme-silver { background: linear-gradient(135deg, #bdc3c7, #95a5a6); }
+        .theme-midnight { background: linear-gradient(135deg, #2c3e50, #000000); }
+        .theme-sunset { background: linear-gradient(135deg, #e67e22, #e74c3c); }
+        .theme-emerald { background: linear-gradient(135deg, #00b894, #00cec9); }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Master Lexicon v3</h2>
+        <a href="/">Dashboard</a>
+        <a href="/settings">Settings</a>
+        <a href="/analytics">Analytics</a>
+        <a href="/logout">Logout ({{ role }})</a>
+    </div>
+
+    <div class="main">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <h3>Settings Panel</h3>
+
+        <div class="setting-block">
+            <form action="/change_language" method="POST">
+                <label for="language">Select Language:</label>
+                <select name="language" id="language">
+                    <option value="English" {% if current_language == 'English' %}selected{% endif %}>English</option>
+                    <option value="Kiswahili" {% if current_language == 'Kiswahili' %}selected{% endif %}>Kiswahili</option>
+                </select>
+                <button type="submit">Save Language</button>
+            </form>
+        </div>
+
+        <div class="setting-block">
+            <form action="/change_theme" method="POST">
+                <label for="theme">Select Theme:</label>
+                <select name="theme" id="theme" onchange="updatePreview()">
+                    <option value="gold" {% if current_theme == 'gold' %}selected{% endif %}>Gold</option>
+                    <option value="blue" {% if current_theme == 'blue' %}selected{% endif %}>Blue</option>
+                    <option value="green" {% if current_theme == 'green' %}selected{% endif %}>Green</option>
+                    <option value="silver" {% if current_theme == 'silver' %}selected{% endif %}>Silver</option>
+                    <option value="midnight" {% if current_theme == 'midnight' %}selected{% endif %}>Midnight</option>
+                    <option value="sunset" {% if current_theme == 'sunset' %}selected{% endif %}>Sunset</option>
+                    <option value="emerald" {% if current_theme == 'emerald' %}selected{% endif %}>Emerald</option>
+                </select>
+                <button type="submit">Save Theme</button>
+
+                <div class="theme-preview">
+                    <div id="preview-gold" class="theme-box theme-gold"></div>
+                    <div id="preview-blue" class="theme-box theme-blue"></div>
+                    <div id="preview-green" class="theme-box theme-green"></div>
+                    <div id="preview-silver" class="theme-box theme-silver"></div>
+                    <div id="preview-midnight" class="theme-box theme-midnight"></div>
+                    <div id="preview-sunset" class="theme-box theme-sunset"></div>
+                    <div id="preview-emerald" class="theme-box theme-emerald"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function updatePreview() {
+            const theme = document.getElementById('theme').value;
+            const ids = ['gold', 'blue', 'green', 'silver', 'midnight', 'sunset', 'emerald'];
+            ids.forEach(t => {
+                document.getElementById('preview-' + t).style.borderColor =
+                    (theme === t) ? '#58a6ff' : '#30363d';
+            });
+        }
+        updatePreview();
+    </script>
+</body>
+</html>

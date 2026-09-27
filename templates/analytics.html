@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Analytics – Master Lexicon v3</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: #0d1117;
+            color: #e6edf3;
+            display: flex;
+        }
+        .sidebar {
+            width: 240px;
+            background: #161b22;
+            padding: 25px;
+            height: 100vh;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.4);
+        }
+        .sidebar h2 {
+            margin-top: 0;
+            color: #58a6ff;
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+        .sidebar a {
+            display: block;
+            padding: 12px 10px;
+            margin-bottom: 8px;
+            color: #c9d1d9;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: 0.25s;
+            font-size: 15px;
+        }
+        .sidebar a:hover {
+            background: #21262d;
+            color: #58a6ff;
+        }
+        .main {
+            flex: 1;
+            padding: 40px;
+        }
+        h3 {
+            color: #58a6ff;
+            margin-bottom: 20px;
+        }
+        .chart-container {
+            background: #161b22;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        canvas {
+            max-width: 600px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #161b22;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #30363d;
+        }
+        th {
+            color: #58a6ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Master Lexicon v3</h2>
+        <a href="/">Dashboard</a>
+        {% if role == 'admin' %}
+        <a href="/settings">Settings</a>
+        {% endif %}
+        <a href="/analytics">Analytics</a>
+        <a href="/logout">Logout ({{ role }})</a>
+    </div>
+
+    <div class="main">
+        <h3>Analytics Dashboard</h3>
+
+        <div class="chart-container">
+            <h4>Words per Category (Bar Chart)</h4>
+            <canvas id="barChart"></canvas>
+        </div>
+
+        <div class="chart-container">
+            <h4>Words per Category (Pie Chart)</h4>
+            <canvas id="pieChart"></canvas>
+        </div>
+
+        <div class="chart-container">
+            <h4>Words Added per Day (Line Chart)</h4>
+            <canvas id="lineChart"></canvas>
+        </div>
+
+        <div class="chart-container">
+            <h4>Top 10 Most Searched Words</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>English</th>
+                        <th>Swahili</th>
+                        <th>Category</th>
+                        <th>Search Count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for w in top_searched %}
+                    <tr>
+                        <td>{{ w.english }}</td>
+                        <td>{{ w.swahili }}</td>
+                        <td>{{ w.category }}</td>
+                        <td>{{ w.search_count }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="chart-container">
+            <h4>Top 10 Most Edited Words</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>English</th>
+                        <th>Swahili</th>
+                        <th>Category</th>
+                        <th>Edit Count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for w in top_edited %}
+                    <tr>
+                        <td>{{ w.english }}</td>
+                        <td>{{ w.swahili }}</td>
+                        <td>{{ w.category }}</td>
+                        <td>{{ w.edit_count }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        const labels = {{ labels|tojson }};
+        const values = {{ values|tojson }};
+        const dateLabels = {{ date_labels|tojson }};
+        const dateValues = {{ date_values|tojson }};
+
+        const barCtx = document.getElementById('barChart').getContext('2d');
+        const pieCtx = document.getElementById('pieChart').getContext('2d');
+        const lineCtx = document.getElementById('lineChart').getContext('2d');
+
+        new Chart(barCtx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Words per Category',
+                    data: values,
+                    backgroundColor: '#1f6feb'
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    x: { ticks: { color: '#e6edf3' } },
+                    y: { ticks: { color: '#e6edf3' } }
+                }
+            }
+        });
+
+        new Chart(pieCtx, {
+            type: 'pie',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: values,
+                    backgroundColor: ['#1f6feb', '#238636', '#b62324', '#f1c40f', '#8e44ad', '#00b894', '#e67e22']
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        labels: { color: '#e6edf3' }
+                    }
+                }
+            }
+        });
+
+        new Chart(lineCtx, {
+            type: 'line',
+            data: {
+                labels: dateLabels,
+                datasets: [{
+                    label: 'Words Added per Day',
+                    data: dateValues,
+                    borderColor: '#58a6ff',
+                    backgroundColor: 'rgba(88,166,255,0.2)',
+                    tension: 0.3
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        labels: { color: '#e6edf3' }
+                    }
+                },
+                scales: {
+                    x: { ticks: { color: '#e6edf3' } },
+                    y: { ticks: { color: '#e6edf3' } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

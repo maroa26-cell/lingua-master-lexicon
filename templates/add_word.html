@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Word – Master Lexicon Enterprise</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        body { margin:0; font-family:'Segoe UI',sans-serif; background:#0d1117; color:#e6edf3; display:flex; }
+        .sidebar { width:240px; background:#161b22; padding:25px; height:100vh; box-shadow:2px 0 10px rgba(0,0,0,0.4); }
+        .sidebar h2 { margin-top:0; color:#58a6ff; font-size:22px; margin-bottom:20px; }
+        .sidebar a { display:block; padding:12px 10px; margin-bottom:8px; color:#c9d1d9; text-decoration:none; border-radius:6px; transition:0.25s; font-size:15px; }
+        .sidebar a:hover { background:#21262d; color:#58a6ff; }
+        .main { flex:1; padding:40px; }
+        .alert { padding:12px; border-radius:6px; margin-bottom:20px; font-size:14px; }
+        .success { background:#238636; }
+        .error { background:#b62324; }
+        .info { background:#1f6feb; }
+        .card { background:#161b22; padding:30px; border-radius:10px; max-width:500px; margin:auto; box-shadow:0 0 15px rgba(0,0,0,0.4); }
+        .card h3 { margin-top:0; font-size:22px; color:#58a6ff; margin-bottom:20px; }
+        .add-form input { width:100%; padding:12px; margin-bottom:15px; border-radius:6px; border:1px solid #30363d; background:#0d1117; color:#e6edf3; font-size:15px; }
+        .add-form button { width:100%; padding:12px; background:#238636; border:none; border-radius:6px; color:white; font-size:16px; cursor:pointer; transition:0.25s; }
+        .add-form button:hover { background:#2ea043; }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>Master Lexicon</h2>
+        <a href="/">Dashboard</a>
+        <a href="/add_word_page">Add Word</a>
+        <a href="/settings">Settings</a>
+    </div>
+
+    <div class="main">
+
+        {% for category, message in get_flashed_messages(with_categories=true) %}
+            <div class="alert {{ category }}">{{ message }}</div>
+        {% endfor %}
+
+        <div class="card">
+            <h3>Add New Word</h3>
+
+            <form action="{{ url_for('add_word') }}" method="POST" class="add-form">
+                <input type="text" name="english" placeholder="English word" required>
+                <input type="text" name="swahili" placeholder="Swahili translation" required>
+                <input type="text" name="category" placeholder="Category (noun, verb, etc.)" required>
+                <button type="submit">Add Word</button>
+            </form>
+        </div>
+
+    </div>
+
+</body>
+</html>

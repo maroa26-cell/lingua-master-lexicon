@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Results – Master Lexicon</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <h2>Master Lexicon</h2>
+        <a href="/">Dashboard</a>
+        <a href="/add_word_page">Add Word</a>
+        <a href="/search">Search</a>
+        <a href="/settings">Settings</a>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main">
+
+        <h2 class="page-title">Search Results for: "{{ query }}"</h2>
+
+        {% if results|length == 0 %}
+            <p class="no-results">No results found.</p>
+        {% else %}
+
+        <table>
+            <tr>
+                <th>English</th>
+                <th>Swahili</th>
+                <th>Category</th>
+                <th>Action</th>
+            </tr>
+
+            {% for w in results %}
+            <tr>
+                <td>{{ w.english }}</td>
+                <td>{{ w.swahili }}</td>
+                <td>{{ w.category }}</td>
+                <td>
+                    <a class="delete-icon" href="/delete/{{ w.id }}">🗑 Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        {% endif %}
+
+    </div>
+
+</body>
+</html>
